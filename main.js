@@ -191,7 +191,7 @@ function getCandidatesForProposal(proposalId) {
    Reemplaza esta URL con la de tu Cloudflare Worker una vez lo despliegues.
    Instrucciones en el archivo worker.js
    ===================================================================== */
-const PROXY_URL = 'TU_WORKER_URL_AQUI'; // ej: https://poli.tu_usuario.workers.dev
+const PROXY_URL = 'https://informate-y-decide.laurareyma.workers.dev/';
 
 /* =====================================================================
    POLI · ASISTENTE IA "PARA DUMMIES"
