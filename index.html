@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infórmate y Decide · Elecciones 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+<div class="app">
+  <nav class="nav">
+    <div class="nav-meta">
+      <span><span class="dot"></span>Elecciones Colombia 2026</span>
+      <span class="pipe"></span>
+      <span>Pedagogía electoral</span>
+    </div>
+    <img id="navLogo" class="nav-logo" alt="Infórmate y Decide" onclick="goto('welcome')" src="">
+  </nav>
+
+  <!-- ============================== WELCOME ============================== -->
+  <div id="screen-welcome" class="screen active">
+    <div class="container">
+      <section class="welcome">
+        <div class="welcome-text">
+          <div class="welcome-eyebrow">Análisis de propuestas · 2026</div>
+          <h1>Tu voto encuentra <em>su forma</em> en 40 preguntas.</h1>
+          <p class="welcome-lead">
+            Una herramienta para descubrir con qué <strong>propuestas</strong> —no candidatos— tienes mayor afinidad. 
+            Veinte áreas críticas, dos visiones alternativas en cada una, un único vector que te describe.
+          </p>
+          <button class="welcome-cta" onclick="startQuiz()">
+            Empezar el test
+            <span class="arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="welcome-stats">
+            <div class="welcome-stat"><span class="num">20</span><div class="lbl">áreas temáticas</div></div>
+            <div class="welcome-stat"><span class="num">40</span><div class="lbl">propuestas</div></div>
+            <div class="welcome-stat"><span class="num">5</span><div class="lbl">candidatos</div></div>
+          </div>
+        </div>
+        <div class="welcome-visual">
+          <div class="card-stack">
+            <div class="vis-card-pad">
+              <div class="vis-tag">Pregunta 17 / 40 · Sanidad</div>
+              <div class="vis-q">El Estado debe eliminar la intermediación de las EPS y manejar directamente los recursos del sistema de salud.</div>
+              <div class="vis-options">
+                <div class="vis-opt">Muy en desacuerdo</div>
+                <div class="vis-opt">En desacuerdo</div>
+                <div class="vis-opt">Neutral</div>
+                <div class="vis-opt sel">De acuerdo</div>
+                <div class="vis-opt">Muy de acuerdo</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-stack">
+            <div class="vis-card-pad">
+              <div class="vis-num">— Área 17</div>
+              <div class="vis-tag" style="margin-top:14px;">Tu propuesta ganadora</div>
+              <div class="vis-area-name">Manejo estatal de la salud</div>
+              <div class="vis-bar"></div>
+              <div class="vis-pct">82<sup>%</sup></div>
+              <div class="vis-tag" style="margin-top:6px;font-size:10px;">afinidad</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="welcome-features">
+        <div class="feat">
+          <div class="feat-num">— 01</div>
+          <h3>Propuestas, no etiquetas.</h3>
+          <p>Mide tu afinidad con propuestas concretas, en 20 áreas que recorren economía, seguridad, ambiente, derechos y reforma del Estado. La identidad partidista solo aparece después de tu decisión.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-num">— 02</div>
+          <h3>Modelo explicable.</h3>
+          <p>Tu vector de respuestas se compara con cada propuesta vía producto punto. Cada porcentaje es trazable hasta la pregunta que lo originó. Sin cajas negras.</p>
+        </div>
+        <div class="feat">
+          <div class="feat-num">— 03</div>
+          <h3>Tres miradas.</h3>
+          <p>Top 20 propuestas con mayor afinidad, ranking agregado por candidato y desglose propuesta a propuesta. Tú eliges qué mirar primero.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============================== QUIZ ============================== -->
+  <div id="screen-quiz" class="screen">
+    <div class="container">
+      <div class="quiz">
+        <div class="progress">
+          <div class="progress-meta">
+            <span><span class="count" id="qCount">01</span> <em>/ 40</em></span>
+            <span id="qPercent">0% · iniciando</span>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <div class="question-card" id="questionCard">
+          <div class="area-tag">
+            <span class="area-num" id="areaNum">— 01</span>
+            <span class="pipe"></span>
+            <span class="area-name" id="areaName">Libertad de Expresión</span>
+          </div>
+          <h2 class="question-text" id="questionText">…</h2>
+          <div class="answers" id="answers">
+            <button class="ans-btn" data-score="-2"><span class="score">−2</span>Muy en desacuerdo</button>
+            <button class="ans-btn" data-score="-1"><span class="score">−1</span>En desacuerdo</button>
+            <button class="ans-btn" data-score="0"><span class="score">0</span>Neutral</button>
+            <button class="ans-btn" data-score="1"><span class="score">+1</span>De acuerdo</button>
+            <button class="ans-btn" data-score="2"><span class="score">+2</span>Muy de acuerdo</button>
+          </div>
+          <div class="quiz-nav">
+            <button class="nav-btn" id="btnPrev" onclick="prevQuestion()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              Anterior
+            </button>
+            <div class="nav-hint">Usa <kbd>1</kbd>–<kbd>5</kbd> o las flechas</div>
+            <button class="nav-btn" id="btnNext" onclick="nextQuestion()">
+              Siguiente
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== RESULTS ============================== -->
+  <div id="screen-results" class="screen">
+    <div class="container">
+      <div class="results">
+        <div class="results-header">
+          <div class="results-eyebrow">Tu mapa de afinidad</div>
+          <h1 class="results-title">Esto piensa <em>tu voto</em>.</h1>
+          <p class="results-sub">Las propuestas que más se acercan a tus respuestas, los candidatos cuya agenda más se parece a la tuya, y todo el detalle.</p>
+        </div>
+
+        <div class="results-toolbar">
+          <div class="view-tabs">
+            <button class="view-tab active" data-view="proposals" onclick="setView('proposals')">Top propuestas</button>
+            <button class="view-tab" data-view="candidates" onclick="setView('candidates')">Por candidato</button>
+            <button class="view-tab" data-view="detail" onclick="setView('detail')">Detalle propuesta a propuesta</button>
+          </div>
+          <button class="restart-btn" onclick="restart()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"/></svg>
+            Reiniciar
+          </button>
+        </div>
+
+        <div class="view-content" id="viewContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Construido con propósito · <strong>Infórmate y Decide</strong> · Una iniciativa de pedagogía electoral para Colombia 2026.
+  </footer>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
