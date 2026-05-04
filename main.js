@@ -121,27 +121,27 @@ const QUESTIONS = [
 const CANDIDATES = [
   {
     id: "cepeda", name: "Iván Cepeda", party: "Pacto Histórico", role: "Progresista / Reformista",
-    photo: "cepeda",
+    photo: "cepeda", pdf: "scr/Propuestas/cepeda.pdf",
     proposalIds: [1, 4, 5, 7, 10, 12, 13, 16, 17, 19, 21, 24, 25, 28, 30, 31, 33, 35, 37, 39]
   },
   {
     id: "espriella", name: "Abelardo de la Espriella", party: "Defensores de la Patria", role: "Derecha radical",
-    photo: "espriella",
+    photo: "espriella", pdf: "scr/Propuestas/espriella.pdf",
     proposalIds: [2, 3, 6, 8, 9, 11, 14, 15, 18, 20, 22, 23, 26, 27, 29, 32, 34, 36, 38, 40]
   },
   {
     id: "valencia", name: "Paloma Valencia", party: "Centro Democrático", role: "Uribista / Conservadora",
-    photo: "valencia",
+    photo: "valencia", pdf: "scr/Propuestas/valencia.pdf",
     proposalIds: [1, 3, 6, 8, 9, 11, 14, 15, 18, 20, 22, 23, 26, 27, 30, 32, 34, 36, 38, 40]
   },
   {
     id: "fajardo", name: "Sergio Fajardo", party: "Dignidad & Compromiso", role: "Centro / Tecnocrático",
-    photo: "fajardo",
+    photo: "fajardo", pdf: "scr/Propuestas/fajardo.pdf",
     proposalIds: [1, 4, 6, 7, 10, 12, 14, 16, 18, 20, 22, 23, 26, 28, 30, 32, 34, 36, 38, 40]
   },
   {
     id: "lopez", name: "Claudia López", party: "Independiente", role: "Centro-izquierda / Gerencial",
-    photo: "lopez",
+    photo: "lopez", pdf: "scr/Propuestas/lopez.pdf",
     proposalIds: [1, 4, 5, 7, 10, 11, 13, 16, 18, 19, 22, 24, 25, 28, 30, 31, 34, 36, 37, 39]
   }
 ];
@@ -185,6 +185,13 @@ function getCandidateAffinity(candidateId) {
 function getCandidatesForProposal(proposalId) {
   return CANDIDATES.filter(c => c.proposalIds.includes(proposalId));
 }
+
+/* =====================================================================
+   CONFIGURACIÓN · PROXY URL
+   Reemplaza esta URL con la de tu Cloudflare Worker una vez lo despliegues.
+   Instrucciones en el archivo worker.js
+   ===================================================================== */
+const PROXY_URL = 'TU_WORKER_URL_AQUI'; // ej: https://poli.tu_usuario.workers.dev
 
 /* =====================================================================
    POLI · ASISTENTE IA "PARA DUMMIES"
@@ -244,7 +251,7 @@ async function askPoli(msg, isAuto = false) {
   const systemPrompt = 'Eres Poli, un amigo cercano que explica política colombiana de forma súper casual y simple. Hablas con jerga colombiana natural. Usas emojis ocasionalmente. Eres completamente neutral políticamente. Cuando usas términos técnicos, los explicas inmediatamente. Tus respuestas son cortas: 2-4 oraciones máximo. Nunca dices "gran pregunta" ni haces introducciones largas. Vas directo al grano.';
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(PROXY_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -404,6 +411,7 @@ function finishQuiz() {
   setTimeout(() => {
     goto('results');
     setView('proposals');
+    sharResultWithChat();
   }, 380);
 }
 
@@ -506,6 +514,10 @@ function renderCandidatesView() {
             <div><span>${low}</span><small>desacuerdos</small></div>
             <div><span>${c.proposalIds.length}</span><small>propuestas</small></div>
           </div>
+          <a class="cand-pdf-btn ${top}" href="${c.pdf}" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Ver plan de gobierno
+          </a>
         </article>`;
     }).join('')}
   </div>`;
@@ -581,3 +593,144 @@ const PHOTOS = {
   fajardo:   'scr/Fajardo.jpeg',
   lopez:     'scr/Claudia.jpeg',
 };
+
+/* =====================================================================
+   CHATBOT FLOTANTE · POLI
+   ===================================================================== */
+const chatHistory = [];
+let chatOpen = false;
+let chatSuggestionsHidden = false;
+
+const CHAT_SYSTEM = `Eres Poli, un asistente amigable y casual que ayuda a colombianos a entender las elecciones presidenciales de 2026. Hablas como un amigo cercano, en español colombiano natural. Usas emojis ocasionalmente. Eres completamente neutral políticamente — no favoreces ningún candidato ni partido, y cuando alguien te pregunta por quién votar, los animas a explorar las propuestas y decidir solos.
+
+Conoces a los 5 candidatos del quiz:
+- Iván Cepeda (Pacto Histórico) — progresista/reformista: propone eliminar las EPS, prohibir nuevos contratos de petróleo, asamblea constituyente, reforma tributaria progresiva, educación superior gratuita.
+- Abelardo de la Espriella (Defensores de la Patria) — derecha radical: plan de gobierno con valores religiosos, fumigación de cultivos, militarización de cárceles, restricción fronteriza, reducir el Estado 40%.
+- Paloma Valencia (Centro Democrático) — uribista/conservadora: defensa de la Constitución de 1991, familia tradicional, fumigación de cultivos, libre competencia, sindicatos limitados.
+- Sergio Fajardo (Dignidad & Compromiso) — centro/tecnocrático: digitalización del Estado, sistema mixto de salud, meritocracia, apertura comercial, Estado digital con IA.
+- Claudia López (Independiente) — centro-izquierda/gerencial: mercados campesinos, reforma laboral, regularización de migrantes, crédito popular subsidiado, educación gratuita.
+
+También conoces el mecanismo del quiz: 40 preguntas sobre 20 áreas, el usuario responde en escala -2 a +2, y se calcula afinidad por producto punto con las propuestas de cada candidato.
+
+Cuando respondas:
+- Sé conciso: 2-4 oraciones para preguntas simples, un poco más para preguntas complejas.
+- Usa ejemplos de la vida cotidiana colombiana.
+- Nunca des una respuesta vacía ni "no puedo responder eso".
+- Si te preguntan por quién votar, explica que eso depende de sus valores y que el quiz es justamente para eso.
+- Si el usuario comparte su resultado del quiz, ayúdale a entenderlo.`;
+
+function openChat() {
+  chatOpen = true;
+  document.getElementById('chatDrawer').classList.add('open');
+  document.getElementById('chatOverlay').classList.add('visible');
+  document.getElementById('chatFab').classList.add('open');
+  document.querySelector('.chat-fab .open-icon').style.display = 'none';
+  document.querySelector('.chat-fab .close-icon').style.display = '';
+  setTimeout(() => document.getElementById('chatInput').focus(), 500);
+}
+
+function closeChat() {
+  chatOpen = false;
+  document.getElementById('chatDrawer').classList.remove('open');
+  document.getElementById('chatOverlay').classList.remove('visible');
+  document.getElementById('chatFab').classList.remove('open');
+  document.querySelector('.chat-fab .open-icon').style.display = '';
+  document.querySelector('.chat-fab .close-icon').style.display = 'none';
+}
+
+function appendUserBubble(text) {
+  const msgs = document.getElementById('chatMessages');
+  msgs.innerHTML += '<div class="chat-user-row"><div class="chat-bubble user">' + text + '</div></div>';
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function appendThinking() {
+  const msgs = document.getElementById('chatMessages');
+  const id = 'thinking-' + Date.now();
+  msgs.innerHTML += '<div class="chat-thinking" id="' + id + '"><div class="chat-avatar-sm">P</div><div class="chat-dots"><span></span><span></span><span></span></div></div>';
+  msgs.scrollTop = msgs.scrollHeight;
+  return id;
+}
+
+function removeThinking(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+function appendBotBubble(text) {
+  const msgs = document.getElementById('chatMessages');
+  const safe = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  msgs.innerHTML += '<div class="chat-bot-row"><div class="chat-avatar-sm">P</div><div class="chat-bubble bot">' + safe + '</div></div>';
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function hideSuggestions() {
+  if (!chatSuggestionsHidden) {
+    const sug = document.getElementById('chatSuggestions');
+    if (sug) { sug.style.display = 'none'; }
+    chatSuggestionsHidden = true;
+  }
+}
+
+async function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('chatSendBtn').disabled = true;
+  hideSuggestions();
+
+  appendUserBubble(msg);
+  chatHistory.push({ role: 'user', content: msg });
+
+  const thinkingId = appendThinking();
+
+  try {
+    const res = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: CHAT_SYSTEM,
+        messages: chatHistory
+      })
+    });
+    const data = await res.json();
+    const reply = (data.content && data.content.find(function(b) { return b.type === 'text'; }));
+    const text = reply ? reply.text : 'Ups, no pude responder ahora mismo. ¡Intenta de nuevo! 😅';
+    chatHistory.push({ role: 'assistant', content: text });
+    removeThinking(thinkingId);
+    appendBotBubble(text);
+  } catch(e) {
+    removeThinking(thinkingId);
+    appendBotBubble('Ups, parece que no tengo conexión ahora mismo. ¡Intenta de nuevo en un momento! 😅');
+  }
+
+  document.getElementById('chatSendBtn').disabled = false;
+  input.focus();
+}
+
+function chatQuick(q) {
+  document.getElementById('chatInput').value = q;
+  sendChatMsg();
+}
+
+// Inyectar resultado en chat cuando el usuario termina el quiz
+function sharResultWithChat() {
+  if (chatHistory.length > 0) return; // ya tiene conversación
+  const ranked = CANDIDATES.map(function(c) {
+    return { name: c.name, party: c.party, pct: Math.round(getCandidateAffinity(c.id)) };
+  }).sort(function(a, b) { return b.pct - a.pct; });
+
+  const summary = ranked.map(function(c, i) {
+    return (i + 1) + '. ' + c.name + ' (' + c.party + '): ' + c.pct + '%';
+  }).join(', ');
+
+  const contextMsg = 'Acabo de terminar el quiz. Mis resultados de afinidad son: ' + summary + '. ¿Me puedes explicar qué significa esto?';
+  chatHistory.push({ role: 'user', content: contextMsg });
+
+  // Pre-cargar una respuesta introductoria sin mostrarlo — solo inyectamos el contexto al historial
+  // para que Poli sepa el resultado cuando el usuario abra el chat.
+}
