@@ -70,46 +70,46 @@ const PROPOSALS = [
 
 // 40 preguntas (texto del PDF)
 const QUESTIONS = [
-  { id: 1,  proposalId: 1,  text: "El Estado debe democratizar los medios para que las voces regionales tengan igual representación que las nacionales." },
-  { id: 2,  proposalId: 2,  text: "El gobierno debería establecer directrices para que la prensa no difunda información manipulada que afecte la moral patriótica." },
-  { id: 3,  proposalId: 3,  text: "Es fundamental que el Plan de Gobierno se sustente explícitamente en valores religiosos y el temor a Dios." },
-  { id: 4,  proposalId: 4,  text: "El Estado debe mantener una laicidad estricta y centrar su ética en la justicia social y la equidad." },
-  { id: 5,  proposalId: 5,  text: "El servicio militar debe ser reemplazado por un servicio social obligatorio enfocado en la paz y el campo." },
-  { id: 6,  proposalId: 6,  text: "Es necesario fortalecer el pie de fuerza y mejorar el armamento de las tropas para retomar el control territorial." },
-  { id: 7,  proposalId: 7,  text: "El Estado debería priorizar la creación de sistemas de cuidado que liberen a las mujeres de la carga doméstica." },
-  { id: 8,  proposalId: 8,  text: "El gobierno debe defender la estructura de la familia tradicional y oponerse a cambios en leyes de adopción y aborto." },
-  { id: 9,  proposalId: 9,  text: "La fumigación aérea de cultivos ilícitos es la herramienta más efectiva para combatir el narcotráfico." },
-  { id: 10, proposalId: 10, text: "El enfoque contra las drogas debe ser la titulación de tierras y la sustitución productiva voluntaria." },
-  { id: 11, proposalId: 11, text: "Estoy de acuerdo con la militarización de cárceles y la creación de bloques de búsqueda contra la extorsión inmediata." },
-  { id: 12, proposalId: 12, text: "La seguridad se logra mediante la consolidación territorial con jueces, profesores y servicios sociales integrados." },
-  { id: 13, proposalId: 13, text: "El Estado debe implementar cuotas de acceso y reparación histórica para corregir el racismo estructural." },
-  { id: 14, proposalId: 14, text: "La meritocracia y el acceso universal a la educación son la única forma justa de combatir la discriminación." },
-  { id: 15, proposalId: 15, text: "Colombia debería restringir el acceso fronterizo y priorizar alianzas de seguridad con potencias como EE. UU. e Israel." },
-  { id: 16, proposalId: 16, text: "La prioridad debe ser la regularización laboral y la integración social de los migrantes en el sistema productivo." },
-  { id: 17, proposalId: 17, text: "Se requiere una Asamblea Nacional Constituyente para redefinir el poder del pueblo y las instituciones." },
-  { id: 18, proposalId: 18, text: "Es prioritario defender la Constitución de 1991 frente a cualquier intento de reforma estructural del sistema político." },
-  { id: 19, proposalId: 19, text: "El país debería prohibir nuevos contratos de petróleo para acelerar la transición hacia una economía verde." },
-  { id: 20, proposalId: 20, text: "Se deben usar los recursos del petróleo y el gas para financiar la protección de la biodiversidad y los parques." },
-  { id: 21, proposalId: 21, text: "Colombia debe integrarse en bloques regionales autónomos para resistir presiones de las grandes potencias." },
-  { id: 22, proposalId: 22, text: "Es preferible una apertura total a la inversión extranjera mediante el fortalecimiento de tratados comerciales globales." },
-  { id: 23, proposalId: 23, text: "Se deben bajar los impuestos a las empresas bajo la condición de que trasladen ese ahorro a los salarios de los empleados." },
-  { id: 24, proposalId: 24, text: "Es necesaria una reforma tributaria progresiva que aumente el recaudo de los multimillonarios y grandes corporaciones." },
-  { id: 25, proposalId: 25, text: "El Estado debe administrar la mayoría de los aportes para garantizar un bono de pensión básica a todos los pobres." },
-  { id: 26, proposalId: 26, text: "Debe fomentarse el ahorro individual mediante cuentas privadas desde el nacimiento, protegidas del gasto estatal." },
-  { id: 27, proposalId: 27, text: "La solidaridad estatal debe enfocarse en subsidios directos a adultos mayores y madres cabeza de hogar." },
-  { id: 28, proposalId: 28, text: "La solidaridad se expresa mejor garantizando educación superior gratuita y acceso universal a internet." },
-  { id: 29, proposalId: 29, text: "Debe reducirse el tamaño del Estado en un 40 % para eliminar trámites y burocracia que frenan al emprendedor." },
-  { id: 30, proposalId: 30, text: "Se debe digitalizar el Estado usando IA para eliminar la corrupción en los trámites sin reducir la inversión social." },
-  { id: 31, proposalId: 31, text: "Los sindicatos deben participar activamente en la dirección de las empresas y en la planeación nacional del país." },
-  { id: 32, proposalId: 32, text: "Es necesario limitar el poder de negociación de los sindicatos estatales para priorizar la eficiencia del gasto público." },
-  { id: 33, proposalId: 33, text: "El Estado debe eliminar la intermediación de las EPS y manejar directamente los recursos del sistema de salud." },
-  { id: 34, proposalId: 34, text: "Debe mantenerse un sistema mixto de competencia regulada entre entes públicos y privados con auditoría técnica." },
-  { id: 35, proposalId: 35, text: "El Banco de la República debería comprar todo el oro nacional para fortalecer la soberanía financiera del país." },
-  { id: 36, proposalId: 36, text: "Debe fomentarse el crédito popular masivo subsidiado para erradicar el préstamo informal o gota a gota." },
-  { id: 37, proposalId: 37, text: "El gobierno debe fomentar mercados campesinos directos para reducir el poder de las grandes cadenas de supermercados." },
-  { id: 38, proposalId: 38, text: "Es preferible garantizar la libre competencia y la inversión de grandes superficies para generar empleo formal." },
-  { id: 39, proposalId: 39, text: "Se debe aprobar una reforma laboral que aumente los recargos nocturnos y la estabilidad del trabajador contratado." },
-  { id: 40, proposalId: 40, text: "Debe flexibilizarse la contratación y reducirse los impuestos a la nómina para combatir la informalidad laboral." }
+  { id: 1,  proposalId: 1,  text: "¿Crees que el gobierno debería repartir más espacio en los medios de comunicación para que las regiones del país tengan la misma voz que Bogotá?" },
+  { id: 2,  proposalId: 2,  text: "¿El gobierno debería poder decirle a los medios de comunicación qué información no pueden publicar si cree que es dañina para el país?" },
+  { id: 3,  proposalId: 3,  text: "¿Te parece bien que el plan de gobierno de Colombia se base abiertamente en valores religiosos y en la fe en Dios?" },
+  { id: 4,  proposalId: 4,  text: "¿Crees que el Estado debería mantenerse completamente separado de la religión y enfocarse solo en la justicia y la igualdad?" },
+  { id: 5,  proposalId: 5,  text: "¿Preferirías que en vez de hacer el servicio militar, los jóvenes hicieran trabajo comunitario en zonas rurales o de paz?" },
+  { id: 6,  proposalId: 6,  text: "¿Crees que Colombia necesita más policías, más soldados y mejores armas para recuperar el control de los territorios peligrosos?" },
+  { id: 7,  proposalId: 7,  text: "¿El Estado debería crear más guarderías, hogares de cuidado y servicios para que las mujeres no carguen solas con el trabajo del hogar?" },
+  { id: 8,  proposalId: 8,  text: "¿Crees que el gobierno debería proteger el modelo de familia tradicional y no cambiar las leyes de adopción ni las de aborto?" },
+  { id: 9,  proposalId: 9,  text: "¿Estás de acuerdo con fumigar desde el aire los cultivos de coca, aunque eso afecte también a campesinos que los cuidan para sobrevivir?" },
+  { id: 10, proposalId: 10, text: "¿Crees que la mejor forma de combatir las drogas es darles tierras a los campesinos y ayudarlos a sembrar otras cosas en vez de coca?" },
+  { id: 11, proposalId: 11, text: "¿Apoyas que el ejército tome el control de las cárceles y que se creen grupos especiales para atacar directamente a las bandas de extorsionistas?" },
+  { id: 12, proposalId: 12, text: "¿Crees que la seguridad mejora cuando el Estado lleva al mismo tiempo jueces, profesores y servicios sociales a los territorios en conflicto?" },
+  { id: 13, proposalId: 13, text: "¿Estás de acuerdo con que el gobierno reserve cupos especiales en empleos y universidades para personas que han sufrido discriminación histórica?" },
+  { id: 14, proposalId: 14, text: "¿Crees que la única forma justa de combatir la discriminación es que todo el mundo tenga acceso a buena educación y que los mejores avancen por mérito?" },
+  { id: 15, proposalId: 15, text: "¿Colombia debería cerrar más sus fronteras y aliarse con países como Estados Unidos e Israel para controlar quién entra al territorio?" },
+  { id: 16, proposalId: 16, text: "¿Crees que Colombia debería darles papeles y trabajo legal a los migrantes venezolanos y de otros países para que contribuyan a la economía?" },
+  { id: 17, proposalId: 17, text: "¿Apoyarías que Colombia hiciera una asamblea para escribir una constitución nueva desde cero, con más poder en manos del pueblo?" },
+  { id: 18, proposalId: 18, text: "¿Crees que la Constitución de 1991 sigue siendo buena y que hay que defenderla en lugar de cambiarla?" },
+  { id: 19, proposalId: 19, text: "¿Estarías de acuerdo con que Colombia deje de firmar nuevos contratos petroleros, aunque eso signifique menos plata para el país a corto plazo?" },
+  { id: 20, proposalId: 20, text: "¿Crees que la plata que genera el petróleo debería usarse para cuidar los parques naturales y la biodiversidad de Colombia?" },
+  { id: 21, proposalId: 21, text: "¿Crees que Colombia debería juntarse más con sus países vecinos y crear sus propios bloques regionales para no depender tanto de EE. UU. o China?" },
+  { id: 22, proposalId: 22, text: "¿Preferirías que Colombia abra sus puertas completamente a empresas e inversiones extranjeras mediante más tratados de libre comercio?" },
+  { id: 23, proposalId: 23, text: "¿Estarías de acuerdo con bajarle los impuestos a las empresas, pero solo si ellas se comprometen a subirle el sueldo a sus empleados?" },
+  { id: 24, proposalId: 24, text: "¿Crees que los más ricos y las grandes empresas deberían pagar muchos más impuestos de los que pagan hoy para financiar servicios públicos?" },
+  { id: 25, proposalId: 25, text: "¿Te parece bien que el Estado maneje la mayor parte de los ahorros para pensiones y garantice una pensión mínima a quienes no tienen nada?" },
+  { id: 26, proposalId: 26, text: "¿Preferirías que cada persona tenga su propia cuenta de ahorros para la vejez desde que nace, sin que el Estado pueda tocar esa plata?" },
+  { id: 27, proposalId: 27, text: "¿Crees que el Estado debería enfocar sus ayudas económicas principalmente en adultos mayores y madres cabeza de familia que más lo necesitan?" },
+  { id: 28, proposalId: 28, text: "¿Crees que la mejor forma de ayudarse entre todos es garantizar que cualquier colombiano pueda ir a la universidad gratis y tener internet en su casa?" },
+  { id: 29, proposalId: 29, text: "¿Apoyarías reducir el Estado colombiano casi a la mitad para eliminar trámites y burocracia que frenan a quienes quieren emprender?" },
+  { id: 30, proposalId: 30, text: "¿Crees que se debe usar tecnología e inteligencia artificial para digitalizar el Estado y acabar con la corrupción en los trámites, sin recortar la inversión social?" },
+  { id: 31, proposalId: 31, text: "¿Te parece bien que los sindicatos (los grupos que representan a los trabajadores) tengan voz y voto en cómo se dirigen las empresas y el país?" },
+  { id: 32, proposalId: 32, text: "¿Crees que los sindicatos del Estado tienen demasiado poder y que hay que limitarlos para que el gasto público sea más eficiente?" },
+  { id: 33, proposalId: 33, text: "¿Estarías de acuerdo con que el Estado elimine las EPS y maneje directamente toda la plata de la salud, sin que haya empresas en el medio?" },
+  { id: 34, proposalId: 34, text: "¿Preferirías que la salud funcione con una mezcla de lo público y lo privado, bien regulada y con auditorías técnicas para evitar abusos?" },
+  { id: 35, proposalId: 35, text: "¿Crees que el Banco de la República debería comprar todo el oro que se produce en Colombia para que el país tenga más independencia financiera?" },
+  { id: 36, proposalId: 36, text: "¿Apoyarías que el gobierno cree créditos baratos y con poca plata para que la gente no tenga que recurrir al gota a gota y los prestamistas ilegales?" },
+  { id: 37, proposalId: 37, text: "¿Crees que el gobierno debería apoyar más los mercados campesinos y de productores locales para reducir el poder de los grandes supermercados?" },
+  { id: 38, proposalId: 38, text: "¿Preferirías que haya libre competencia y que los grandes supermercados e hipermercados puedan operar sin restricciones porque generan empleo?" },
+  { id: 39, proposalId: 39, text: "¿Estás de acuerdo con aprobar una reforma laboral que les suba el pago a quienes trabajan de noche y que haga más difícil despedir a los empleados?" },
+  { id: 40, proposalId: 40, text: "¿Crees que es mejor hacer más fácil contratar personas y quitarle costos a las empresas para que se formalice el empleo informal en Colombia?" }
 ];
 
 /* Mapeo propuesta ↔ candidato según el PDF
@@ -187,6 +187,105 @@ function getCandidatesForProposal(proposalId) {
 }
 
 /* =====================================================================
+   POLI · ASISTENTE IA "PARA DUMMIES"
+   ===================================================================== */
+const AREA_HINTS = {
+  "Libertad de Expresión": "quién controla qué se puede decir o publicar en Colombia",
+  "Religión": "si el gobierno debe o no mezclarse con la fe religiosa",
+  "Servicio Militar": "qué deben hacer los jóvenes colombianos para cumplir con el país",
+  "Sexualidad": "los derechos de las familias y las mujeres en Colombia",
+  "Drogas": "cómo combatir los cultivos de coca y el narcotráfico",
+  "Seguridad": "cómo hacer que Colombia sea más segura",
+  "Discriminación": "cómo tratar de forma justa a quienes han sido excluidos históricamente",
+  "Inmigración": "qué hacer con los migrantes, especialmente los venezolanos",
+  "Nación": "si se debe cambiar o defender la constitución colombiana",
+  "Medio Ambiente": "el petróleo vs el planeta: el dilema ambiental de Colombia",
+  "Globalización": "si Colombia debe abrirse más al mundo o protegerse",
+  "Impuestos": "quién paga más impuestos y cómo afecta eso a los empleados",
+  "Pensiones": "cómo ahorrar para la vejez: ¿tú solo o con el Estado?",
+  "Solidaridad": "cómo ayuda el Estado a los colombianos que más lo necesitan",
+  "Permisos": "cuántos trámites y burocracia tiene el Estado colombiano",
+  "Sindicatos": "el poder de los sindicatos (grupos de trabajadores organizados)",
+  "Sanidad": "cómo funciona el sistema de salud en Colombia y quién lo maneja",
+  "Bancos": "cómo manejar el dinero y el crédito en Colombia",
+  "Grandes Superficies": "supermercados grandes vs mercados campesinos locales",
+  "Mercado Laboral": "cómo contratar trabajadores y qué derechos tienen"
+};
+
+let poliHistory = [];
+
+async function togglePoli() {
+  const panel = document.getElementById('poliPanel');
+  const isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+    return;
+  }
+  panel.classList.add('open');
+  poliHistory = [];
+  const q = QUESTIONS[state.current];
+  const proposal = PROPOSALS.find(p => p.id === q.proposalId);
+  const area = AREAS.find(a => a.id === proposal.areaId);
+  const hint = AREA_HINTS[area.name] || area.name;
+  await askPoli(`Explícame en muy simple y casual, como si le hablaras a alguien que no sabe nada de política, el tema de "${area.name}" en Colombia. Este tema trata sobre: ${hint}. La pregunta del quiz es: "${q.text}". Dame máximo 3 oraciones cortas y usa ejemplos cotidianos.`, true);
+}
+
+async function askPoli(msg, isAuto = false) {
+  const msgs = document.getElementById('poliMessages');
+  if (!isAuto) {
+    msgs.innerHTML += '<div class="poli-user-msg">' + msg + '</div>';
+    poliHistory.push({ role: 'user', content: msg });
+  } else {
+    msgs.innerHTML = '<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>';
+    poliHistory.push({ role: 'user', content: msg });
+  }
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const systemPrompt = 'Eres Poli, un amigo cercano que explica política colombiana de forma súper casual y simple. Hablas con jerga colombiana natural. Usas emojis ocasionalmente. Eres completamente neutral políticamente. Cuando usas términos técnicos, los explicas inmediatamente. Tus respuestas son cortas: 2-4 oraciones máximo. Nunca dices "gran pregunta" ni haces introducciones largas. Vas directo al grano.';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: poliHistory
+      })
+    });
+    const data = await res.json();
+    const text = data.content && data.content.find(function(b){ return b.type === 'text'; });
+    const reply = text ? text.text : 'No pude responder \uD83D\uDE05';
+    poliHistory.push({ role: 'assistant', content: reply });
+    msgs.innerHTML = msgs.innerHTML.replace('<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>', '');
+    msgs.innerHTML += '<div class="poli-bot-msg"><span class="poli-avatar">P</span><div class="poli-text">' + reply + '</div></div>';
+    msgs.scrollTop = msgs.scrollHeight;
+  } catch(e) {
+    msgs.innerHTML += '<div class="poli-bot-msg"><span class="poli-avatar">P</span><div class="poli-text">Ups, no pude conectarme \uD83D\uDE05 \u00A1Intenta de nuevo!</div></div>';
+  }
+}
+
+function sendPoliMsg() {
+  const input = document.getElementById('poliInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  const msgs = document.getElementById('poliMessages');
+  msgs.innerHTML += '<div class="poli-user-msg">' + msg + '</div>';
+  msgs.innerHTML += '<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>';
+  poliHistory.push({ role: 'user', content: msg });
+  msgs.scrollTop = msgs.scrollHeight;
+  askPoli(msg, false);
+}
+
+function poliQuick(q) {
+  var input = document.getElementById('poliInput');
+  input.value = q;
+  sendPoliMsg();
+}
+
+/* =====================================================================
    NAVIGATION
    ===================================================================== */
 function goto(name) {
@@ -198,6 +297,29 @@ function startQuiz() {
   state.current = 0;
   state.answers = {};
   goto('quiz');
+  // Inject Poli panel if not already present
+  if (!document.getElementById('poliPanel')) {
+    const card = document.getElementById('questionCard');
+    const wrapHTML = '<div class="poli-trigger-wrap">' +
+      '<button class="poli-trigger" onclick="togglePoli()">' +
+      '<span class="poli-dot">P</span>' +
+      '<span>No entiendo bien este tema… <span class="poli-badge">Pregúntale a Poli</span></span>' +
+      '</button></div>' +
+      '<div class="poli-panel" id="poliPanel">' +
+        '<div class="poli-panel-head"><div class="poli-dot">P</div><div class="poli-info"><div class="name">Poli — tu asistente político</div><div class="sub">Te explico todo sin vueltas 🗳️</div></div></div>' +
+        '<div class="poli-messages" id="poliMessages"></div>' +
+        '<div class="poli-quick-qs">' +
+          '<button class="poli-quick-q" onclick="poliQuick(\'¿Cómo me afecta esto en mi vida diaria?\')">¿Cómo me afecta?</button>' +
+          '<button class="poli-quick-q" onclick="poliQuick(\'Dame un ejemplo sencillo de la vida real\')">Ejemplo real</button>' +
+          '<button class="poli-quick-q" onclick="poliQuick(\'¿Cuál es el argumento a favor y en contra?\')">¿Pros y contras?</button>' +
+        '</div>' +
+        '<div class="poli-input-row">' +
+          '<input class="poli-input" id="poliInput" placeholder="Pregúntale algo a Poli…" onkeydown="if(event.key===\'Enter\') sendPoliMsg()">' +
+          '<button class="poli-send" onclick="sendPoliMsg()">Enviar</button>' +
+        '</div>' +
+      '</div>';
+    card.insertAdjacentHTML('beforebegin', wrapHTML);
+  }
   renderQuestion(true);
 }
 function restart() {
@@ -216,6 +338,10 @@ function paintQuestion() {
   document.getElementById('areaNum').textContent = '— ' + String(area.id).padStart(2, '0');
   document.getElementById('areaName').textContent = area.name;
   document.getElementById('questionText').textContent = q.text;
+  // Reset Poli panel on each new question
+  const poliPanel = document.getElementById('poliPanel');
+  if (poliPanel) { poliPanel.classList.remove('open'); }
+  poliHistory = [];
   const pct = Math.round(((state.current) / QUESTIONS.length) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('qCount').textContent = String(state.current + 1).padStart(2, '0');
