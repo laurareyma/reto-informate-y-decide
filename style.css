@@ -1668,3 +1668,28 @@ footer {
     color: var(--bg);
     background: rgba(29,11,62,0.12);
   }
+
+/* ===== FORM SCREEN ===== */
+.form-screen {
+  padding: 60px 0 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.form-header {
+  text-align: center;
+  max-width: 640px;
+}
+.form-embed-wrap {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(29,11,62,0.12);
+  border: 1.5px solid rgba(29,11,62,0.10);
+}
+.form-footer {
+  display: flex;
+  justify-content: center;
+}

@@ -32,7 +32,7 @@
             Responde 40 preguntas en lenguaje normal (sin tecnicismos) y descubre qué <strong>propuestas y candidatos</strong> piensan más parecido a ti.
             Si no entiendes algo, <strong>Poli</strong> te explica en el camino. ¡Sin drama!
           </p>
-          <button class="welcome-cta" onclick="startQuiz()">
+          <button class="welcome-cta" onclick="goto('form')">
             ¡Descubrir mi voto!
             <span class="arrow">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -91,6 +91,42 @@
     </div>
   </div>
 
+  <!-- ============================== FORM ============================== -->
+  <div id="screen-form" class="screen">
+    <div class="container">
+      <div class="form-screen">
+        <div class="form-header">
+          <div class="results-eyebrow">Antes de comenzar</div>
+          <h1 class="results-title">Completa este <em>formulario</em></h1>
+          <p class="results-sub">Por favor llena el siguiente formulario antes de realizar la encuesta. Solo toma un momento.</p>
+        </div>
+        <div class="form-embed-wrap">
+          <iframe
+            width="100%"
+            height="520px"
+            src="https://forms.office.com/Pages/ResponsePage.aspx?id=MRalrP4ADUmRqxY--HJg7gqUy8s8gmhFtQjJvLQBeCZUREFLM0hGSkxYN0tOUDY4UFZEN1NCMEw2QS4u&embed=true"
+            frameborder="0"
+            marginwidth="0"
+            marginheight="0"
+            style="border: none; max-width:100%; max-height:100vh;"
+            allowfullscreen
+            webkitallowfullscreen
+            mozallowfullscreen
+            msallowfullscreen>
+          </iframe>
+        </div>
+        <div class="form-footer">
+          <button class="welcome-cta" onclick="startQuiz()">
+            Ya llené el formulario, ¡continuar!
+            <span class="arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================== QUIZ ============================== -->
   <div id="screen-quiz" class="screen">
     <div class="container">
@@ -103,6 +139,7 @@
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         </div>
 
+        <!-- POLI QUIZ (desactivado — sin conexión a IA)
         <div class="poli-trigger-wrap">
           <button class="poli-trigger" onclick="togglePoli()">
             <span class="poli-dot">P</span>
@@ -129,6 +166,7 @@
             <button class="poli-send" onclick="sendPoliMsg()">Enviar</button>
           </div>
         </div>
+        -->
 
         <div class="question-card" id="questionCard">
           <div class="area-tag">
@@ -138,11 +176,11 @@
           </div>
           <h2 class="question-text" id="questionText">…</h2>
           <div class="answers" id="answers">
-            <button class="ans-btn" data-score="-2"><span class="score">−2</span>No, para nada</button>
-            <button class="ans-btn" data-score="-1"><span class="score">−1</span>No creo</button>
-            <button class="ans-btn" data-score="0"><span class="score">0</span>Más o menos</button>
-            <button class="ans-btn" data-score="1"><span class="score">+1</span>Sí, creo que sí</button>
-            <button class="ans-btn" data-score="2"><span class="score">+2</span>¡Sí, totalmente!</button>
+            <button class="ans-btn" data-score="-2"><span class="score">1</span>No, para nada</button>
+            <button class="ans-btn" data-score="-1"><span class="score">2</span>No creo</button>
+            <button class="ans-btn" data-score="0"><span class="score">3</span>Más o menos</button>
+            <button class="ans-btn" data-score="1"><span class="score">4</span>Sí, creo que sí</button>
+            <button class="ans-btn" data-score="2"><span class="score">5</span>¡Sí, totalmente!</button>
           </div>
           <div class="quiz-nav">
             <button class="nav-btn" id="btnPrev" onclick="prevQuestion()">
@@ -191,7 +229,7 @@
     Construido con propósito · <strong>Votolab</strong> · Una iniciativa de pedagogía electoral para Colombia 2026.
   </footer>
 
-  <!-- ============================== CHATBOT FLOTANTE · POLI ============================== -->
+  <!-- ============================== CHATBOT FLOTANTE · POLI (desactivado — sin conexión a IA) ==============================
   <button class="chat-fab" id="chatFab" onclick="openChat()">
     <div class="chat-fab-inner">
       <span class="open-icon">
@@ -241,8 +279,7 @@
       </button>
     </div>
   </div>
-
-</div>
+  -->
 
 <script src="main.js"></script>
 </body>
