@@ -32,7 +32,7 @@
             Responde 40 preguntas en lenguaje normal (sin tecnicismos) y descubre qué <strong>propuestas y candidatos</strong> piensan más parecido a ti.
             Si no entiendes algo, <strong>Poli</strong> te explica en el camino. ¡Sin drama!
           </p>
-          <button class="welcome-cta" onclick="goto('form')">
+          <button class="welcome-cta" onclick="startQuiz()">
             ¡Descubrir mi voto!
             <span class="arrow">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -88,42 +88,6 @@
           <p>Al final ves: las propuestas con las que más coincidiste, cuál candidato se parece más a ti, y el desglose tema por tema. Todo claro y sin rollos.</p>
         </div>
       </section>
-    </div>
-  </div>
-
-  <!-- ============================== FORM ============================== -->
-  <div id="screen-form" class="screen">
-    <div class="container">
-      <div class="form-screen">
-        <div class="form-header">
-          <div class="results-eyebrow">Antes de comenzar</div>
-          <h1 class="results-title">Completa este <em>formulario</em></h1>
-          <p class="results-sub">Por favor llena el siguiente formulario antes de realizar la encuesta. Solo toma un momento.</p>
-        </div>
-        <div class="form-embed-wrap">
-          <iframe
-            width="100%"
-            height="520px"
-            src="https://forms.office.com/Pages/ResponsePage.aspx?id=MRalrP4ADUmRqxY--HJg7gqUy8s8gmhFtQjJvLQBeCZUREFLM0hGSkxYN0tOUDY4UFZEN1NCMEw2QS4u&embed=true"
-            frameborder="0"
-            marginwidth="0"
-            marginheight="0"
-            style="border: none; max-width:100%; max-height:100vh;"
-            allowfullscreen
-            webkitallowfullscreen
-            mozallowfullscreen
-            msallowfullscreen>
-          </iframe>
-        </div>
-        <div class="form-footer">
-          <button class="welcome-cta" onclick="startQuiz()">
-            Ya llené el formulario, ¡continuar!
-            <span class="arrow">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-            </span>
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 
