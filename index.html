@@ -30,7 +30,7 @@
           <h1>Tu voto <em>encuentra su forma</em></h1>
           <p class="welcome-lead">
             Responde 40 preguntas en lenguaje normal (sin tecnicismos) y descubre qué <strong>propuestas y candidatos</strong> piensan más parecido a ti.
-            Si no entiendes algo, <strong>Poli</strong> te explica en el camino. ¡Sin drama!
+            ¡Sin drama!
           </p>
           <button class="welcome-cta" onclick="startQuiz()">
             ¡Descubrir mi voto!
@@ -103,35 +103,6 @@
           <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
         </div>
 
-        <!-- POLI QUIZ (desactivado — sin conexión a IA)
-        <div class="poli-trigger-wrap">
-          <button class="poli-trigger" onclick="togglePoli()">
-            <span class="poli-dot">P</span>
-            <span>No entiendo bien este tema… <span class="poli-badge">Pregúntale a Poli</span></span>
-          </button>
-        </div>
-
-        <div class="poli-panel" id="poliPanel">
-          <div class="poli-panel-head">
-            <div class="poli-dot">P</div>
-            <div class="poli-info">
-              <div class="name">Poli — tu asistente político</div>
-              <div class="sub">Te explico todo sin vueltas 🗳️</div>
-            </div>
-          </div>
-          <div class="poli-messages" id="poliMessages"></div>
-          <div class="poli-quick-qs">
-            <button class="poli-quick-q" onclick="poliQuick('¿Cómo me afecta esto en mi vida diaria?')">¿Cómo me afecta?</button>
-            <button class="poli-quick-q" onclick="poliQuick('Dame un ejemplo sencillo de la vida real')">Ejemplo real</button>
-            <button class="poli-quick-q" onclick="poliQuick('¿Cuál es el argumento a favor y en contra?')">¿Pros y contras?</button>
-          </div>
-          <div class="poli-input-row">
-            <input class="poli-input" id="poliInput" placeholder="Pregúntale algo a Poli…" onkeydown="if(event.key==='Enter') sendPoliMsg()">
-            <button class="poli-send" onclick="sendPoliMsg()">Enviar</button>
-          </div>
-        </div>
-        -->
-
         <div class="question-card" id="questionCard">
           <div class="area-tag">
             <span class="area-num" id="areaNum">— 01</span>
@@ -192,58 +163,6 @@
   <footer>
     Construido con propósito · <strong>Votolab</strong> · Una iniciativa de pedagogía electoral para Colombia 2026.
   </footer>
-
-  <!-- ============================== CHATBOT FLOTANTE · POLI (desactivado — sin conexión a IA) ==============================
-  <button class="chat-fab" id="chatFab" onclick="openChat()">
-    <div class="chat-fab-inner">
-      <span class="open-icon">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </span>
-      <span class="close-icon" style="display:none">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </span>
-    </div>
-    <span class="chat-fab-label">Pregúntale a Poli</span>
-    <span class="chat-fab-pulse"></span>
-  </button>
-
-  <div class="chat-overlay" id="chatOverlay" onclick="closeChat()"></div>
-
-  <div class="chat-drawer" id="chatDrawer">
-    <div class="chat-drawer-head">
-      <div class="chat-head-info">
-        <div class="chat-avatar-lg">P</div>
-        <div>
-          <div class="chat-head-name">Poli</div>
-          <div class="chat-head-sub">Tu asistente político · Colombia 2026</div>
-        </div>
-      </div>
-      <button class="chat-close-btn" onclick="closeChat()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-bot-row">
-        <div class="chat-avatar-sm">P</div>
-        <div class="chat-bubble bot">¡Hola! Soy Poli 👋 Tu guía para entender las elecciones de Colombia 2026. Pregúntame lo que quieras sobre los candidatos, sus propuestas o cómo funciona el quiz. ¡Sin tecnicismos!</div>
-      </div>
-    </div>
-    <div class="chat-suggestions" id="chatSuggestions">
-      <button class="chat-sug" onclick="chatQuick('¿Cuál es la diferencia principal entre los candidatos?')">¿Cuál es la diferencia entre los candidatos?</button>
-      <button class="chat-sug" onclick="chatQuick('¿Cómo funciona el sistema de salud en Colombia?')">¿Cómo funciona la salud en Colombia?</button>
-      <button class="chat-sug" onclick="chatQuick('¿Qué es el Pacto Histórico?')">¿Qué es el Pacto Histórico?</button>
-      <button class="chat-sug" onclick="chatQuick('Explícame el tema de las pensiones de forma simple')">¿Cómo funcionan las pensiones?</button>
-    </div>
-    <div class="chat-input-area">
-      <textarea class="chat-textarea" id="chatInput" placeholder="Escríbele a Poli…" rows="1"
-        onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendChatMsg(); }"
-        oninput="this.style.height='auto'; this.style.height=this.scrollHeight+'px';"></textarea>
-      <button class="chat-send-btn" id="chatSendBtn" onclick="sendChatMsg()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      </button>
-    </div>
-  </div>
-  -->
 
 <script src="main.js"></script>
 </body>

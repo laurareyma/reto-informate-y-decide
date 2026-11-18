@@ -187,112 +187,6 @@ function getCandidatesForProposal(proposalId) {
 }
 
 /* =====================================================================
-   CONFIGURACIÓN · PROXY URL
-   Reemplaza esta URL con la de tu Cloudflare Worker una vez lo despliegues.
-   Instrucciones en el archivo worker.js
-   ===================================================================== */
-const PROXY_URL = 'https://informate-y-decide.laurareyma.workers.dev/';
-
-/* =====================================================================
-   POLI · ASISTENTE IA "PARA DUMMIES"
-   ===================================================================== */
-const AREA_HINTS = {
-  "Libertad de Expresión": "quién controla qué se puede decir o publicar en Colombia",
-  "Religión": "si el gobierno debe o no mezclarse con la fe religiosa",
-  "Servicio Militar": "qué deben hacer los jóvenes colombianos para cumplir con el país",
-  "Sexualidad": "los derechos de las familias y las mujeres en Colombia",
-  "Drogas": "cómo combatir los cultivos de coca y el narcotráfico",
-  "Seguridad": "cómo hacer que Colombia sea más segura",
-  "Discriminación": "cómo tratar de forma justa a quienes han sido excluidos históricamente",
-  "Inmigración": "qué hacer con los migrantes, especialmente los venezolanos",
-  "Nación": "si se debe cambiar o defender la constitución colombiana",
-  "Medio Ambiente": "el petróleo vs el planeta: el dilema ambiental de Colombia",
-  "Globalización": "si Colombia debe abrirse más al mundo o protegerse",
-  "Impuestos": "quién paga más impuestos y cómo afecta eso a los empleados",
-  "Pensiones": "cómo ahorrar para la vejez: ¿tú solo o con el Estado?",
-  "Solidaridad": "cómo ayuda el Estado a los colombianos que más lo necesitan",
-  "Permisos": "cuántos trámites y burocracia tiene el Estado colombiano",
-  "Sindicatos": "el poder de los sindicatos (grupos de trabajadores organizados)",
-  "Sanidad": "cómo funciona el sistema de salud en Colombia y quién lo maneja",
-  "Bancos": "cómo manejar el dinero y el crédito en Colombia",
-  "Grandes Superficies": "supermercados grandes vs mercados campesinos locales",
-  "Mercado Laboral": "cómo contratar trabajadores y qué derechos tienen"
-};
-
-let poliHistory = [];
-
-async function togglePoli() {
-  const panel = document.getElementById('poliPanel');
-  const isOpen = panel.classList.contains('open');
-  if (isOpen) {
-    panel.classList.remove('open');
-    return;
-  }
-  panel.classList.add('open');
-  poliHistory = [];
-  const q = QUESTIONS[state.current];
-  const proposal = PROPOSALS.find(p => p.id === q.proposalId);
-  const area = AREAS.find(a => a.id === proposal.areaId);
-  const hint = AREA_HINTS[area.name] || area.name;
-  await askPoli(`Explícame en muy simple y casual, como si le hablaras a alguien que no sabe nada de política, el tema de "${area.name}" en Colombia. Este tema trata sobre: ${hint}. La pregunta del quiz es: "${q.text}". Dame máximo 3 oraciones cortas y usa ejemplos cotidianos.`, true);
-}
-
-async function askPoli(msg, isAuto = false) {
-  const msgs = document.getElementById('poliMessages');
-  if (!isAuto) {
-    msgs.innerHTML += '<div class="poli-user-msg">' + msg + '</div>';
-    poliHistory.push({ role: 'user', content: msg });
-  } else {
-    msgs.innerHTML = '<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>';
-    poliHistory.push({ role: 'user', content: msg });
-  }
-  msgs.scrollTop = msgs.scrollHeight;
-
-  const systemPrompt = 'Eres Poli, un amigo cercano que explica política colombiana de forma súper casual y simple. Hablas con jerga colombiana natural. Usas emojis ocasionalmente. Eres completamente neutral políticamente. Cuando usas términos técnicos, los explicas inmediatamente. Tus respuestas son cortas: 2-4 oraciones máximo. Nunca dices "gran pregunta" ni haces introducciones largas. Vas directo al grano.';
-
-  try {
-    const res = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: poliHistory
-      })
-    });
-    const data = await res.json();
-    const text = data.content && data.content.find(function(b){ return b.type === 'text'; });
-    const reply = text ? text.text : 'No pude responder \uD83D\uDE05';
-    poliHistory.push({ role: 'assistant', content: reply });
-    msgs.innerHTML = msgs.innerHTML.replace('<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>', '');
-    msgs.innerHTML += '<div class="poli-bot-msg"><span class="poli-avatar">P</span><div class="poli-text">' + reply + '</div></div>';
-    msgs.scrollTop = msgs.scrollHeight;
-  } catch(e) {
-    msgs.innerHTML += '<div class="poli-bot-msg"><span class="poli-avatar">P</span><div class="poli-text">Ups, no pude conectarme \uD83D\uDE05 \u00A1Intenta de nuevo!</div></div>';
-  }
-}
-
-function sendPoliMsg() {
-  const input = document.getElementById('poliInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  input.value = '';
-  const msgs = document.getElementById('poliMessages');
-  msgs.innerHTML += '<div class="poli-user-msg">' + msg + '</div>';
-  msgs.innerHTML += '<div class="poli-loading">Dame un segundo\u2026 \uD83E\uDD14</div>';
-  poliHistory.push({ role: 'user', content: msg });
-  msgs.scrollTop = msgs.scrollHeight;
-  askPoli(msg, false);
-}
-
-function poliQuick(q) {
-  var input = document.getElementById('poliInput');
-  input.value = q;
-  sendPoliMsg();
-}
-
-/* =====================================================================
    NAVIGATION
    ===================================================================== */
 function goto(name) {
@@ -304,29 +198,6 @@ function startQuiz() {
   state.current = 0;
   state.answers = {};
   goto('quiz');
-  // Inject Poli panel if not already present
-  if (!document.getElementById('poliPanel')) {
-    const card = document.getElementById('questionCard');
-    const wrapHTML = '<div class="poli-trigger-wrap">' +
-      '<button class="poli-trigger" onclick="togglePoli()">' +
-      '<span class="poli-dot">P</span>' +
-      '<span>No entiendo bien este tema… <span class="poli-badge">Pregúntale a Poli</span></span>' +
-      '</button></div>' +
-      '<div class="poli-panel" id="poliPanel">' +
-        '<div class="poli-panel-head"><div class="poli-dot">P</div><div class="poli-info"><div class="name">Poli — tu asistente político</div><div class="sub">Te explico todo sin vueltas 🗳️</div></div></div>' +
-        '<div class="poli-messages" id="poliMessages"></div>' +
-        '<div class="poli-quick-qs">' +
-          '<button class="poli-quick-q" onclick="poliQuick(\'¿Cómo me afecta esto en mi vida diaria?\')">¿Cómo me afecta?</button>' +
-          '<button class="poli-quick-q" onclick="poliQuick(\'Dame un ejemplo sencillo de la vida real\')">Ejemplo real</button>' +
-          '<button class="poli-quick-q" onclick="poliQuick(\'¿Cuál es el argumento a favor y en contra?\')">¿Pros y contras?</button>' +
-        '</div>' +
-        '<div class="poli-input-row">' +
-          '<input class="poli-input" id="poliInput" placeholder="Pregúntale algo a Poli…" onkeydown="if(event.key===\'Enter\') sendPoliMsg()">' +
-          '<button class="poli-send" onclick="sendPoliMsg()">Enviar</button>' +
-        '</div>' +
-      '</div>';
-    card.insertAdjacentHTML('beforebegin', wrapHTML);
-  }
   renderQuestion(true);
 }
 function restart() {
@@ -345,10 +216,6 @@ function paintQuestion() {
   document.getElementById('areaNum').textContent = '— ' + String(area.id).padStart(2, '0');
   document.getElementById('areaName').textContent = area.name;
   document.getElementById('questionText').textContent = q.text;
-  // Reset Poli panel on each new question
-  const poliPanel = document.getElementById('poliPanel');
-  if (poliPanel) { poliPanel.classList.remove('open'); }
-  poliHistory = [];
   const pct = Math.round(((state.current) / QUESTIONS.length) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('qCount').textContent = String(state.current + 1).padStart(2, '0');
@@ -411,7 +278,6 @@ function finishQuiz() {
   setTimeout(() => {
     goto('results');
     setView('proposals');
-    sharResultWithChat();
   }, 380);
 }
 
@@ -593,144 +459,3 @@ const PHOTOS = {
   fajardo:   'scr/Fajardo.jpeg',
   lopez:     'scr/Claudia.jpeg',
 };
-
-/* =====================================================================
-   CHATBOT FLOTANTE · POLI
-   ===================================================================== */
-const chatHistory = [];
-let chatOpen = false;
-let chatSuggestionsHidden = false;
-
-const CHAT_SYSTEM = `Eres Poli, un asistente amigable y casual que ayuda a colombianos a entender las elecciones presidenciales de 2026. Hablas como un amigo cercano, en español colombiano natural. Usas emojis ocasionalmente. Eres completamente neutral políticamente — no favoreces ningún candidato ni partido, y cuando alguien te pregunta por quién votar, los animas a explorar las propuestas y decidir solos.
-
-Conoces a los 5 candidatos del quiz:
-- Iván Cepeda (Pacto Histórico) — progresista/reformista: propone eliminar las EPS, prohibir nuevos contratos de petróleo, asamblea constituyente, reforma tributaria progresiva, educación superior gratuita.
-- Abelardo de la Espriella (Defensores de la Patria) — derecha radical: plan de gobierno con valores religiosos, fumigación de cultivos, militarización de cárceles, restricción fronteriza, reducir el Estado 40%.
-- Paloma Valencia (Centro Democrático) — uribista/conservadora: defensa de la Constitución de 1991, familia tradicional, fumigación de cultivos, libre competencia, sindicatos limitados.
-- Sergio Fajardo (Dignidad & Compromiso) — centro/tecnocrático: digitalización del Estado, sistema mixto de salud, meritocracia, apertura comercial, Estado digital con IA.
-- Claudia López (Independiente) — centro-izquierda/gerencial: mercados campesinos, reforma laboral, regularización de migrantes, crédito popular subsidiado, educación gratuita.
-
-También conoces el mecanismo del quiz: 40 preguntas sobre 20 áreas, el usuario responde en escala -2 a +2, y se calcula afinidad por producto punto con las propuestas de cada candidato.
-
-Cuando respondas:
-- Sé conciso: 2-4 oraciones para preguntas simples, un poco más para preguntas complejas.
-- Usa ejemplos de la vida cotidiana colombiana.
-- Nunca des una respuesta vacía ni "no puedo responder eso".
-- Si te preguntan por quién votar, explica que eso depende de sus valores y que el quiz es justamente para eso.
-- Si el usuario comparte su resultado del quiz, ayúdale a entenderlo.`;
-
-function openChat() {
-  chatOpen = true;
-  document.getElementById('chatDrawer').classList.add('open');
-  document.getElementById('chatOverlay').classList.add('visible');
-  document.getElementById('chatFab').classList.add('open');
-  document.querySelector('.chat-fab .open-icon').style.display = 'none';
-  document.querySelector('.chat-fab .close-icon').style.display = '';
-  setTimeout(() => document.getElementById('chatInput').focus(), 500);
-}
-
-function closeChat() {
-  chatOpen = false;
-  document.getElementById('chatDrawer').classList.remove('open');
-  document.getElementById('chatOverlay').classList.remove('visible');
-  document.getElementById('chatFab').classList.remove('open');
-  document.querySelector('.chat-fab .open-icon').style.display = '';
-  document.querySelector('.chat-fab .close-icon').style.display = 'none';
-}
-
-function appendUserBubble(text) {
-  const msgs = document.getElementById('chatMessages');
-  msgs.innerHTML += '<div class="chat-user-row"><div class="chat-bubble user">' + text + '</div></div>';
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function appendThinking() {
-  const msgs = document.getElementById('chatMessages');
-  const id = 'thinking-' + Date.now();
-  msgs.innerHTML += '<div class="chat-thinking" id="' + id + '"><div class="chat-avatar-sm">P</div><div class="chat-dots"><span></span><span></span><span></span></div></div>';
-  msgs.scrollTop = msgs.scrollHeight;
-  return id;
-}
-
-function removeThinking(id) {
-  const el = document.getElementById(id);
-  if (el) el.remove();
-}
-
-function appendBotBubble(text) {
-  const msgs = document.getElementById('chatMessages');
-  const safe = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-  msgs.innerHTML += '<div class="chat-bot-row"><div class="chat-avatar-sm">P</div><div class="chat-bubble bot">' + safe + '</div></div>';
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function hideSuggestions() {
-  if (!chatSuggestionsHidden) {
-    const sug = document.getElementById('chatSuggestions');
-    if (sug) { sug.style.display = 'none'; }
-    chatSuggestionsHidden = true;
-  }
-}
-
-async function sendChatMsg() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  input.value = '';
-  input.style.height = 'auto';
-  document.getElementById('chatSendBtn').disabled = true;
-  hideSuggestions();
-
-  appendUserBubble(msg);
-  chatHistory.push({ role: 'user', content: msg });
-
-  const thinkingId = appendThinking();
-
-  try {
-    const res = await fetch(PROXY_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: CHAT_SYSTEM,
-        messages: chatHistory
-      })
-    });
-    const data = await res.json();
-    const reply = (data.content && data.content.find(function(b) { return b.type === 'text'; }));
-    const text = reply ? reply.text : 'Ups, no pude responder ahora mismo. ¡Intenta de nuevo! 😅';
-    chatHistory.push({ role: 'assistant', content: text });
-    removeThinking(thinkingId);
-    appendBotBubble(text);
-  } catch(e) {
-    removeThinking(thinkingId);
-    appendBotBubble('Ups, parece que no tengo conexión ahora mismo. ¡Intenta de nuevo en un momento! 😅');
-  }
-
-  document.getElementById('chatSendBtn').disabled = false;
-  input.focus();
-}
-
-function chatQuick(q) {
-  document.getElementById('chatInput').value = q;
-  sendChatMsg();
-}
-
-// Inyectar resultado en chat cuando el usuario termina el quiz
-function sharResultWithChat() {
-  if (chatHistory.length > 0) return; // ya tiene conversación
-  const ranked = CANDIDATES.map(function(c) {
-    return { name: c.name, party: c.party, pct: Math.round(getCandidateAffinity(c.id)) };
-  }).sort(function(a, b) { return b.pct - a.pct; });
-
-  const summary = ranked.map(function(c, i) {
-    return (i + 1) + '. ' + c.name + ' (' + c.party + '): ' + c.pct + '%';
-  }).join(', ');
-
-  const contextMsg = 'Acabo de terminar el quiz. Mis resultados de afinidad son: ' + summary + '. ¿Me puedes explicar qué significa esto?';
-  chatHistory.push({ role: 'user', content: contextMsg });
-
-  // Pre-cargar una respuesta introductoria sin mostrarlo — solo inyectamos el contexto al historial
-  // para que Poli sepa el resultado cuando el usuario abra el chat.
-}
